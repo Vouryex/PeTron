@@ -1,5 +1,5 @@
 # PeTron
-A two player action game with racing elements incorporated. It is greatly inspired by the classic game Tron which was released back in the 1980’s. The game’s basic gameplay consists of two light cycles that leave a light trail in order to cut each other's path and destroy its opponent. Additional power-ups are included in the game bringing a little bit of unique taste to its gameplay. 
+PeTron is greatly inspired by the classic game Tron which was released back in the 1980’s. The game’s basic gameplay consists of two light cycles that leave a light trail in order to cut each other's path and destroy its opponent. Additional power-ups are included in the game bringing a little bit of unique taste to its gameplay.
 
 ## Downloads
 [jar and resources](https://drive.google.com/open?id=0B_bQSPGjJcnmX1V4dWNuX3MxQXM)
