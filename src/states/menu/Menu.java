@@ -180,7 +180,7 @@ public class Menu extends GameState {
 	}
 	
 	public void draw(Graphics2D g2d) {		
-		g2d.drawImage(backgroundImage, 0, 0, Game.frameWidth, Game.frameHeight, null);
+		g2d.drawImage(backgroundImage, 0, 0, Game.getFrameWidth(), Game.getFrameHeight(), null);
 		startButton.draw(g2d);
 		optionsButton.draw(g2d);
 		creditsButton.draw(g2d);

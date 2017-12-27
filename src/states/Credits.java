@@ -30,7 +30,7 @@ public class Credits extends GameState {
 	/**Image Dimensions**/
 	public int backButton_height = 30;
 	public int backButton_width = 107;
-	public int backButton_leftBound = (Game.frameWidth / 2) - (backButton_width / 2);
+	public int backButton_leftBound = (Game.getFrameWidth() / 2) - (backButton_width / 2);
 	public int backButton_rightBound = backButton_leftBound + backButton_width;
 	public int backButton_upBound = 558;
 	public int backButton_downBound = backButton_upBound + backButton_height;
@@ -125,7 +125,7 @@ public class Credits extends GameState {
 	}
 	
 	public void draw(Graphics2D g2d) {
-		g2d.drawImage(insideCredits, 0, 0, Game.frameWidth, Game.frameHeight, null);
+		g2d.drawImage(insideCredits, 0, 0, Game.getFrameWidth(), Game.getFrameHeight(), null);
 		g2d.drawImage(backShow, backButton_leftBound, backButton_upBound, backButton_width, backButton_height, null);
 	}
 }

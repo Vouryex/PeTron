@@ -3,14 +3,11 @@ package states.game;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
 import states.game.interfaces.Paintable;
 import engine.utilities.Animation;
 
 public class Arena implements Paintable {
-	private Game game;
 	private int upBound;
 	private int rightBound;
 	private int downBound;
@@ -22,31 +19,31 @@ public class Arena implements Paintable {
 	private BufferedImage arenaSpritesheet;
 	private BufferedImage[] arenaSprites;
 	private Animation arenaAnimation;
-	private VirtualBorder virtualBorder; 
-	
-	public Arena(Game game) {
-		this.game = game;
-		initDimensions(game);
+	private VirtualBorder virtualBorder;
+
+	public Arena() {
+		initDimensions();
 		initImage();
 		initSprite();
 		initAnimation();
 		virtualBorder = new VirtualBorder(this);
 	}
-	
-	private void initDimensions(Game game) {
-		upBound = (game.frameHeight / 8) - 22;
-		rightBound = game.frameWidth;
-		downBound = game.frameHeight;
+
+	private void initDimensions() {
+		upBound = (Game.getFrameHeight() / 8) - 22;
+		rightBound = Game.getFrameWidth();
+		downBound = Game.getFrameHeight();
 		leftBound = 0;
 		width = rightBound - leftBound;
 		height = downBound - upBound;
 		horizontalCenter = (width / 2) + leftBound;
 		verticalCenter = (height / 2) + upBound;
 	}
-	
+
 	private void initImage() {
 		try {
-			arenaSpritesheet = ImageIO.read((getClass().getResourceAsStream("/images/game/Arena Spritesheet.png")));
+			arenaSpritesheet = ImageIO.read((getClass().getResourceAsStream(
+					"/images/game/Arena Spritesheet.png")));
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -56,7 +53,9 @@ public class Arena implements Paintable {
 		try {
 			arenaSprites = new BufferedImage[20];
 			for(int i = 0; i < 20; i++) {
-				arenaSprites[i] = arenaSpritesheet.getSubimage(i * width, 0, game.frameWidth, game.frameHeight);
+				arenaSprites[i] = arenaSpritesheet.getSubimage(
+						i * width, 0, Game.getFrameWidth(),
+						Game.getFrameHeight());
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -70,11 +69,12 @@ public class Arena implements Paintable {
 	}
 
 	public void paint(Graphics2D g2d) {
-		g2d.drawImage(arenaAnimation.getImage(), 0, 0, game.frameWidth, game.frameHeight, null);
+		g2d.drawImage(arenaAnimation.getImage(), 0, 0,
+				Game.getFrameWidth(), Game.getFrameHeight(), null);
 		virtualBorder.paint(g2d);
 		arenaAnimation.update();
 	}
-	
+
 	public int getUpBound() {
 		return upBound;
 	}

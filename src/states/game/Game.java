@@ -40,12 +40,8 @@ import engine.utilities.Sound;
 public class Game extends GameState {
 	
 	private static Game gameInstance;
-	/**Dimensions**/
-	// each state should have their own width and height
-	// rename
-	public static final int frameWidth = 1000; 
-	public static final int frameHeight = 600;
-	/**************/
+	private static final int frameWidth = 1000;
+	private static final int frameHeight = 600;
 	
 	/**Intervals**/
 	// rename transition interval
@@ -111,7 +107,7 @@ public class Game extends GameState {
 	}
 
 	public void init(GameStateEngine gameStateEngine) {
-		arena  = new Arena(gameInstance);
+		arena  = new Arena();
 		statusBar = new StatusBar(gameInstance);
 		motorBiker1 = new Player1();
 		motorBiker2 = new Player2();
@@ -662,8 +658,18 @@ public class Game extends GameState {
     public MotorBiker getMotorBiker1() {
     	return motorBiker1;
     }
-    
-    public MotorBiker getMotorBiker2() {
+
+	public MotorBiker getMotorBiker2() {
     	return motorBiker2;
     }
+
+	public static int getFrameWidth() {
+		return frameWidth;
+	}
+
+	public static int getFrameHeight() {
+		return frameHeight;
+	}
 }
+
+

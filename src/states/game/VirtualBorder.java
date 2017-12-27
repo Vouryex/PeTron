@@ -1,7 +1,7 @@
 package states.game;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
-
 import states.game.interfaces.Paintable;
 
 public class VirtualBorder implements Paintable {
@@ -13,10 +13,15 @@ public class VirtualBorder implements Paintable {
 	private VirtualSubBorder downBorder;
 	
 	public VirtualBorder(Arena arena) {
-		leftBorder = new VirtualSubBorder(arena.getLeftBound(), arena.getUpBound(), WIDTH, arena.getHeight(), COLOR);
-		rightBorder = new VirtualSubBorder(arena.getRightBound() - WIDTH, arena.getUpBound(), WIDTH, arena.getHeight(), COLOR);
-		upBorder = new VirtualSubBorder(arena.getLeftBound(), arena.getUpBound(), arena.getWidth(), WIDTH, COLOR);
-		downBorder = new VirtualSubBorder(arena.getLeftBound(), arena.getDownBound() - (WIDTH + 11), arena.getWidth(), WIDTH + 11, COLOR);
+		leftBorder = new VirtualSubBorder(arena.getLeftBound(),
+				arena.getUpBound(), WIDTH, arena.getHeight(), COLOR);
+		rightBorder = new VirtualSubBorder(arena.getRightBound() - WIDTH,
+				arena.getUpBound(), WIDTH, arena.getHeight(), COLOR);
+		upBorder = new VirtualSubBorder(arena.getLeftBound(),
+				arena.getUpBound(), arena.getWidth(), WIDTH, COLOR);
+		downBorder = new VirtualSubBorder(arena.getLeftBound(),
+				arena.getDownBound() - (WIDTH + 11),
+				arena.getWidth(), WIDTH + 11, COLOR);
 	}
 	
 	public void paint(Graphics2D g) {

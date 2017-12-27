@@ -11,5 +11,4 @@ public interface Collideable {
 	public int getLeftBound();
 	public int getRightBound();
 	public Rectangle getBounds();
-	
 }

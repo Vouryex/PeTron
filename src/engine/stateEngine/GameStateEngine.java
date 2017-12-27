@@ -20,7 +20,7 @@ public class GameStateEngine {
 		
 		JFrame frame = new JFrame("Menu");
 		frame.add(mainPanel);
-		frame.setSize(Game.frameWidth, Game.frameHeight);
+		frame.setSize(Game.getFrameWidth(), Game.getFrameHeight());
 		frame.setUndecorated(true);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,8 +55,8 @@ public class GameStateEngine {
 		GameStateEngine gameStateEngine = GameStateEngine.getInstance();
 		Menu.getInstance().init(gameStateEngine);
 		gameStateEngine.pushState(Menu.getInstance());
-		
-		
+
+
 		while(true) {
 			gameStateEngine.update();
 			gameStateEngine.draw();
