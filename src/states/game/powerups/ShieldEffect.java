@@ -67,20 +67,19 @@ public class ShieldEffect implements Paintable {
 	public void paint(Graphics2D g) {
 		/*Paint Shield*/
 		/*3*/
-		if(motorBiker.direction == MotorBiker.DIRECTION_LEFT) {
-			g.drawImage(shieldEffectAnimHorizontal.getImage(), motorBiker.xPos - (MotorBiker.HEIGHT - MotorBiker.WIDTH) - (length / 2) + (MotorBiker.WIDTH), motorBiker.yPos - (width / 2) + (MotorBiker.WIDTH / 2), length, width, null);
+		if(motorBiker.getDirection() == MotorBiker.DIRECTION_LEFT) {
+			g.drawImage(shieldEffectAnimHorizontal.getImage(), motorBiker.getxPos() - (MotorBiker.getHEIGHT() - MotorBiker.getWIDTH()) - (length / 2) + (MotorBiker.getWIDTH()), motorBiker.getyPos() - (width / 2) + (MotorBiker.getWIDTH() / 2), length, width, null);
 			shieldEffectAnimHorizontal.update();
-		} else if(motorBiker.direction == MotorBiker.DIRECTION_RIGHT) {
-			g.drawImage(shieldEffectAnimHorizontal.getImage(), motorBiker.xPos - (length / 2) + (MotorBiker.WIDTH), motorBiker.yPos - (width / 2) + (MotorBiker.WIDTH / 2), length, width, null);
+		} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_RIGHT) {
+			g.drawImage(shieldEffectAnimHorizontal.getImage(), motorBiker.getxPos() - (length / 2) + (MotorBiker.getWIDTH()), motorBiker.getyPos() - (width / 2) + (MotorBiker.getWIDTH() / 2), length, width, null);
 			shieldEffectAnimHorizontal.update();
-		} else if(motorBiker.direction == MotorBiker.DIRECTION_UP) {
-			g.drawImage(shieldEffectAnimVertical.getImage(), motorBiker.xPos - (MotorBiker.WIDTH/4) - (width / 2) + (motorBiker.WIDTH/2), motorBiker.yPos - (MotorBiker.HEIGHT - MotorBiker.WIDTH) - (width / 2) + (MotorBiker.WIDTH / 2), width, length, null);
+		} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_UP) {
+			g.drawImage(shieldEffectAnimVertical.getImage(), motorBiker.getxPos() - (MotorBiker.getWIDTH()/4) - (width / 2) + (motorBiker.getWIDTH()/2), motorBiker.getyPos() - (MotorBiker.getHEIGHT() - MotorBiker.getWIDTH()) - (width / 2) + (MotorBiker.getWIDTH() / 2), width, length, null);
 			shieldEffectAnimVertical.update();
 		} else {
-			g.drawImage(shieldEffectAnimVertical.getImage(), motorBiker.xPos - (MotorBiker.WIDTH/4) - (width / 2) + (motorBiker.WIDTH/2), motorBiker.yPos - (width / 2) + (MotorBiker.WIDTH / 2), width, length, null);
+			g.drawImage(shieldEffectAnimVertical.getImage(), motorBiker.getxPos() - (MotorBiker.getWIDTH()/4) - (width / 2) + (motorBiker.getWIDTH()/2), motorBiker.getyPos() - (width / 2) + (MotorBiker.getWIDTH() / 2), width, length, null);
 			shieldEffectAnimVertical.update();
 		}
 		/**/
-		/*************/		
 	}
 }

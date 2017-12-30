@@ -9,8 +9,11 @@ import states.game.Game;
 public class Player2 extends MotorBiker {
 	
 	private static Player2 Player2Instance;
-	private static final int XPOS = Game.getInstance().getArena().getHorizontalCenter() + (Game.getInstance().getArena().getHorizontalCenter() / 2);
-	private static final int YPOS = Game.getInstance().getArena().getVerticalCenter();
+	private static final int XPOS = Game.getInstance().getArena().
+			getHorizontalCenter()
+			+ (Game.getInstance().getArena().getHorizontalCenter() / 2);
+	private static final int YPOS = Game.getInstance().
+			getArena().getVerticalCenter();
 	private static final int DIRECTION = MotorBiker.DIRECTION_LEFT;
 	private static final Color COLOR = Color.MAGENTA;
 	private static final int UP_BUTTON = KeyEvent.VK_I;
@@ -21,8 +24,8 @@ public class Player2 extends MotorBiker {
 	private static final int POWERUP_BUTTON_2 = KeyEvent.VK_O;
 
 	public Player2() {
-		super(XPOS, YPOS, DIRECTION, COLOR, UP_BUTTON, DOWN_BUTTON, LEFT_BUTTON, RIGHT_BUTTON, POWERUP_BUTTON_1,
-				POWERUP_BUTTON_2);
+		super(XPOS, YPOS, DIRECTION, COLOR, UP_BUTTON, DOWN_BUTTON, LEFT_BUTTON,
+				RIGHT_BUTTON, POWERUP_BUTTON_1, POWERUP_BUTTON_2);
 	}
 	
 	public static Player2 getInstance() {

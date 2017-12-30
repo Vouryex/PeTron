@@ -29,23 +29,23 @@ public class SubSideBladeSkill implements Collideable, Paintable {
 	public void paint(Graphics2D g) {
 		g.setColor(color);
 		if(orientation == FIRST_ORIENTATION) { 
-			if(motorBiker.direction == MotorBiker.DIRECTION_UP) {
+			if(motorBiker.getDirection() == MotorBiker.DIRECTION_UP) {
 				g.fillRect(motorBiker.getLeftBound() - LENGTH, motorBiker.getUpBound(), LENGTH, WIDTH);
-			} else if(motorBiker.direction == MotorBiker.DIRECTION_DOWN) {
+			} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_DOWN) {
 				g.fillRect(motorBiker.getRightBound(), motorBiker.getDownBound() - WIDTH, LENGTH, WIDTH);
-			} else if(motorBiker.direction == MotorBiker.DIRECTION_LEFT) {
+			} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_LEFT) {
 				g.fillRect(motorBiker.getLeftBound(), motorBiker.getDownBound(), WIDTH, LENGTH);
-			} else if(motorBiker.direction == MotorBiker.DIRECTION_RIGHT) {
+			} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_RIGHT) {
 				g.fillRect(motorBiker.getRightBound() - WIDTH, motorBiker.getUpBound() - LENGTH, WIDTH, LENGTH);
 			}
 		} else if(orientation == SECOND_ORIENTATION) {
-			if(motorBiker.direction == MotorBiker.DIRECTION_UP) {
+			if(motorBiker.getDirection() == MotorBiker.DIRECTION_UP) {
 				g.fillRect(motorBiker.getRightBound(), motorBiker.getUpBound(), LENGTH, WIDTH);
-			} else if(motorBiker.direction == MotorBiker.DIRECTION_DOWN) {
+			} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_DOWN) {
 				g.fillRect(motorBiker.getLeftBound() - LENGTH, motorBiker.getDownBound() - WIDTH, LENGTH, WIDTH);
-			} else if(motorBiker.direction == MotorBiker.DIRECTION_LEFT) {
+			} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_LEFT) {
 				g.fillRect(motorBiker.getLeftBound(), motorBiker.getUpBound() - LENGTH, WIDTH, LENGTH);
-			} else if(motorBiker.direction == MotorBiker.DIRECTION_RIGHT) {
+			} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_RIGHT) {
 				g.fillRect(motorBiker.getRightBound() - WIDTH, motorBiker.getDownBound(), WIDTH, LENGTH);
 			}
 		}
@@ -82,21 +82,21 @@ public class SubSideBladeSkill implements Collideable, Paintable {
 	@Override
 	public Rectangle getBounds() {
 		if(orientation == FIRST_ORIENTATION) { 
-			if(motorBiker.direction == MotorBiker.DIRECTION_UP) {
+			if(motorBiker.getDirection() == MotorBiker.DIRECTION_UP) {
 				return new Rectangle(motorBiker.getLeftBound() - LENGTH, motorBiker.getUpBound(), LENGTH, WIDTH);
-			} else if(motorBiker.direction == MotorBiker.DIRECTION_DOWN) {
+			} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_DOWN) {
 				return new Rectangle(motorBiker.getRightBound(), motorBiker.getDownBound() - WIDTH, LENGTH, WIDTH);
-			} else if(motorBiker.direction == MotorBiker.DIRECTION_LEFT) {
+			} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_LEFT) {
 				return new Rectangle(motorBiker.getLeftBound(), motorBiker.getDownBound(), WIDTH, LENGTH);
 			} else { // motorBiker.direction == MotorBiker.DIRECTION_RIGHT
 				return new Rectangle(motorBiker.getRightBound() - WIDTH, motorBiker.getUpBound() - LENGTH, WIDTH, LENGTH);
 			}
 		} else { // orientation == SECOND_ORIENTATION
-			if(motorBiker.direction == MotorBiker.DIRECTION_UP) {
+			if(motorBiker.getDirection() == MotorBiker.DIRECTION_UP) {
 				return new Rectangle(motorBiker.getRightBound(), motorBiker.getUpBound(), LENGTH, WIDTH);
-			} else if(motorBiker.direction == MotorBiker.DIRECTION_DOWN) {
+			} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_DOWN) {
 				return new Rectangle(motorBiker.getLeftBound() - LENGTH, motorBiker.getDownBound() - WIDTH, LENGTH, WIDTH);
-			} else if(motorBiker.direction == MotorBiker.DIRECTION_LEFT) {
+			} else if(motorBiker.getDirection() == MotorBiker.DIRECTION_LEFT) {
 				return new Rectangle(motorBiker.getLeftBound(), motorBiker.getUpBound() - LENGTH, WIDTH, LENGTH);
 			} else { // motorBiker.direction == MotorBiker.DIRECTION_RIGHT
 				return new Rectangle(motorBiker.getRightBound() - WIDTH, motorBiker.getDownBound(), WIDTH, LENGTH);

@@ -107,12 +107,12 @@ public class StatusBar implements Paintable {
 
 	private void paintPowerupStack(Graphics2D g) {
 		MotorBiker motorBiker = game.getMotorBiker1();
-		if(motorBiker.powerUp1 != null) {
-			g.drawImage(motorBiker.powerUp1.statusImage, powerupRelativeXPos ,
+		if(motorBiker.getPowerUp1() != null) {
+			g.drawImage(motorBiker.getPowerUp1().statusImage, powerupRelativeXPos ,
 					powerupRelativeYPos, powerupWidth, powerupHeight, null);
 		}
-		if(motorBiker.powerUp2 != null) {
-			g.drawImage(motorBiker.powerUp2.statusImage,
+		if(motorBiker.getPowerUp2() != null) {
+			g.drawImage(motorBiker.getPowerUp2().statusImage,
 					powerupRelativeXPos - powerupWidth
 							- (powerupWidth / 5) - 13,  powerupRelativeYPos,
 					powerupWidth, powerupHeight, null);
@@ -120,14 +120,14 @@ public class StatusBar implements Paintable {
 		}
 
 		motorBiker = game.getMotorBiker2();
-		if(motorBiker.powerUp1 != null) {
-			g.drawImage(motorBiker.powerUp1.statusImage,
+		if(motorBiker.getPowerUp1() != null) {
+			g.drawImage(motorBiker.getPowerUp1().statusImage,
 					Game.getFrameWidth() - powerupRelativeXPos
 							- powerupWidth - 3 ,
 					powerupRelativeYPos, powerupWidth, powerupHeight, null);
 		}
-		if(motorBiker.powerUp2 != null) {
-			g.drawImage(motorBiker.powerUp2.statusImage,
+		if(motorBiker.getPowerUp2() != null) {
+			g.drawImage(motorBiker.getPowerUp2().statusImage,
 					Game.getFrameWidth() - (powerupRelativeXPos - powerupWidth
 							- (powerupWidth / 5)) - powerupWidth - 3 + 13,
 					powerupRelativeYPos, powerupWidth, powerupHeight, null);
@@ -136,26 +136,26 @@ public class StatusBar implements Paintable {
 
 	private void paintPowerupActivated(Graphics2D g) {
 		MotorBiker motorBiker = game.getMotorBiker1();
-		if(motorBiker.sideBladeActivated) {
+		if(motorBiker.isSideBladeActivated()) {
 			int index = (int) (motorBiker.statusCurrentTime
-					- motorBiker.sideBladeActivatedTime) / 1000;
+					- motorBiker.getSideBladeActivatedTime()) / 1000;
 			if(index < 6) {
 				g.drawImage(sideBladeStatusCountSheet[index],
 						110, 39, 25, 23, null);
 			}
 		}
-		if(motorBiker.shieldActivated) {
+		if(motorBiker.isShieldActivated()) {
 			int index = (int) (motorBiker.statusCurrentTime
-					- motorBiker.shieldActivatedTime) / 1000;
+					- motorBiker.getShieldActivatedTime()) / 1000;
 			if(index < 6) {
 				g.drawImage(shieldStatusCountSheet[index],
 						150, 39, 25, 23, null);
 			}
 		}
 
-		if(motorBiker.reverseActivated) {
+		if(motorBiker.isReverseActivated()) {
 			int index = (int) (motorBiker.statusCurrentTime
-					- motorBiker.reverseActivatedTime) / 1000;
+					- motorBiker.getReverseActivatedTime()) / 1000;
 			if(index < 6) {
 				g.drawImage(reverseStatusCountSheet[index],
 						190, 39, 25, 23, null);
@@ -163,25 +163,25 @@ public class StatusBar implements Paintable {
 		}
 
 		motorBiker = game.getMotorBiker2();
-		if(motorBiker.sideBladeActivated) {
+		if(motorBiker.isSideBladeActivated()) {
 			int index = (int) (motorBiker.statusCurrentTime
-					- motorBiker.sideBladeActivatedTime) / 1000;
+					- motorBiker.getSideBladeActivatedTime()) / 1000;
 			if(index < 6) {
 				g.drawImage(sideBladeStatusCountSheet[index],
 						785, 39, 25, 23, null);
 			}
 		}
-		if(motorBiker.shieldActivated) {
+		if(motorBiker.isShieldActivated()) {
 			int index = (int) (motorBiker.statusCurrentTime
-					- motorBiker.shieldActivatedTime) / 1000;
+					- motorBiker.getShieldActivatedTime()) / 1000;
 			if(index < 6) {
 				g.drawImage(shieldStatusCountSheet[index],
 						825, 39, 25, 23, null);
 			}
 		}
-		if(motorBiker.reverseActivated) {
+		if(motorBiker.isReverseActivated()) {
 			int index = (int) (motorBiker.statusCurrentTime
-					- motorBiker.reverseActivatedTime) / 1000;
+					- motorBiker.getReverseActivatedTime()) / 1000;
 			if(index < 6) {
 				g.drawImage(reverseStatusCountSheet[index],
 						865, 39, 25, 23, null);

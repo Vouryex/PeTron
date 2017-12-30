@@ -152,15 +152,15 @@ public class Game extends GameState {
 					
 					for(MotorBiker motorBikerObj : motorBikerList) {
 						if(motorBikerObj.hasKey(e.getKeyCode())) {
-							if(!(motorBikerObj.direction == MotorBiker.DIRECTION_LEFT && motorBikerObj.leftButton == e.getKeyCode() ||
-							     motorBikerObj.direction == MotorBiker.DIRECTION_RIGHT && motorBikerObj.rightButton == e.getKeyCode() ||
-							     motorBikerObj.direction == MotorBiker.DIRECTION_UP && motorBikerObj.upButton == e.getKeyCode() ||
-							     motorBikerObj.direction == MotorBiker.DIRECTION_DOWN && motorBikerObj.downButton == e.getKeyCode())) 
+							if(!(motorBikerObj.getDirection() == MotorBiker.DIRECTION_LEFT && motorBikerObj.getLeftButton() == e.getKeyCode() ||
+							     motorBikerObj.getDirection() == MotorBiker.DIRECTION_RIGHT && motorBikerObj.getRightButton() == e.getKeyCode() ||
+							     motorBikerObj.getDirection() == MotorBiker.DIRECTION_UP && motorBikerObj.getUpButton() == e.getKeyCode() ||
+							     motorBikerObj.getDirection() == MotorBiker.DIRECTION_DOWN && motorBikerObj.getDownButton() == e.getKeyCode()))
 							{
-								if(currentTime > motorBikerObj.keyPressTime + KEYPRESS_INTERVAL) {
+								if(currentTime > motorBikerObj.getKeyPressTime() + KEYPRESS_INTERVAL) {
 									motorBikerObj.keyPressedList.clear();
 									motorBikerObj.keyPressedList.add(e.getKeyCode());
-									motorBikerObj.keyPressTime = System.currentTimeMillis();
+									motorBikerObj.setKeyPressTime(System.currentTimeMillis());
 								} else {
 									motorBikerObj.pendingKeyList.clear();
 									motorBikerObj.pendingKeyList.add(e.getKeyCode());
@@ -424,7 +424,7 @@ public class Game extends GameState {
 				if(motorBiker.collision(collideObj) || collideObj.collision(motorBiker)) {
 					// if instance of trail
 					if(collideObj instanceof Trail && !collideObj.collision(motorBiker)) {
-						if(!motorBiker.shieldActivated) {
+						if(!motorBiker.isShieldActivated()) {
 							Sound.motorhittrail.play();
 							((Trail)collideObj).setColor(Color.WHITE);
 							if(motorBiker == motorBiker1) player2Score++;
@@ -449,7 +449,7 @@ public class Game extends GameState {
 						}
 					} else if(collideObj instanceof VirtualSubBorder) {
 						// if instance of subBorders
-						if(motorBiker.shieldActivated) {
+						if(motorBiker.isShieldActivated()) {
 							Sound.shieldhitwall.play();
 						} else {
 							Sound.motorhitwall.play();
@@ -464,17 +464,17 @@ public class Game extends GameState {
 						gameStateEngine.pushState(Score.getInstance());
 						break;
 					} else if(collideObj instanceof SubSideBladeSkill) {
-						if(motorBiker.shieldActivated) {
-							if((motorBiker.sideBladeSkill != null && (motorBiker.sideBladeSkill.sideBlade1 != (SubSideBladeSkill) collideObj &&
-							    motorBiker.sideBladeSkill.sideBlade2 != (SubSideBladeSkill) collideObj)) || motorBiker.sideBladeSkill == null) 
+						if(motorBiker.isShieldActivated()) {
+							if((motorBiker.getSideBladeSkill() != null && (motorBiker.getSideBladeSkill().sideBlade1 != (SubSideBladeSkill) collideObj &&
+							    motorBiker.getSideBladeSkill().sideBlade2 != (SubSideBladeSkill) collideObj)) || motorBiker.getSideBladeSkill() == null)
 							{
 								Sound.shieldhitsideblade.play();
 								removeCollideables.add(collideObj);
 								paintableList.remove((Paintable)collideObj);
 							}
 						} else {
-							if((motorBiker.sideBladeSkill != null && (motorBiker.sideBladeSkill.sideBlade1 != (SubSideBladeSkill) collideObj &&
-							    motorBiker.sideBladeSkill.sideBlade2 != (SubSideBladeSkill) collideObj)) || motorBiker.sideBladeSkill == null) 
+							if((motorBiker.getSideBladeSkill() != null && (motorBiker.getSideBladeSkill().sideBlade1 != (SubSideBladeSkill) collideObj &&
+							    motorBiker.getSideBladeSkill().sideBlade2 != (SubSideBladeSkill) collideObj)) || motorBiker.getSideBladeSkill() == null)
 							{
 								if(motorBiker == motorBiker1) player2Score++;
 								else						  player1Score++;
@@ -490,7 +490,7 @@ public class Game extends GameState {
 						}
 					} else if(collideObj instanceof MotorBiker && collideObj != motorBiker){
 						// if instance of motor biker
-						if(motorBiker.shieldActivated && ((MotorBiker)collideObj).shieldActivated) {
+						if(motorBiker.isShieldActivated() && ((MotorBiker)collideObj).isShieldActivated()) {
 							Sound.shieldshieldmotor.play();
 							motorBiker.imageExplode();
 							((MotorBiker)collideObj).imageExplode();
@@ -500,7 +500,7 @@ public class Game extends GameState {
 							Score.getInstance().setMessage("Hit by enemy, draw");
 							gameStateEngine.pushState(Score.getInstance());
 							break;
-						} else if(motorBiker.shieldActivated && !((MotorBiker)collideObj).shieldActivated) {
+						} else if(motorBiker.isShieldActivated() && !((MotorBiker)collideObj).isShieldActivated()) {
 							if(motorBiker == motorBiker1) player1Score++;
 							else						  player2Score++;
 							Sound.shieldshieldmotor.play();
@@ -512,7 +512,7 @@ public class Game extends GameState {
 							gameStateEngine.pushState(Score.getInstance());
 						    roundTerminate = true;
 							break;
-						} else if(!motorBiker.shieldActivated && ((MotorBiker)collideObj).shieldActivated) {
+						} else if(!motorBiker.isShieldActivated() && ((MotorBiker)collideObj).isShieldActivated()) {
 							if(motorBiker == motorBiker1) player2Score++;
 							else						  player1Score++;
 							Sound.shieldshieldmotor.play();
@@ -554,11 +554,11 @@ public class Game extends GameState {
 	public void initiatePendingKeys() {
 		long currentTime = System.currentTimeMillis();
 		for(MotorBiker motorBikerObj:motorBikerList) {
-			if(!motorBikerObj.pendingKeyList.isEmpty() && currentTime > motorBikerObj.keyPressTime + KEYPRESS_INTERVAL) {
+			if(!motorBikerObj.pendingKeyList.isEmpty() && currentTime > motorBikerObj.getKeyPressTime() + KEYPRESS_INTERVAL) {
 				motorBikerObj.keyPressedList.clear();
 				motorBikerObj.keyPressedList.add(motorBikerObj.pendingKeyList.get(motorBikerObj.pendingKeyList.size()-1));
 				motorBikerObj.pendingKeyList.clear();
-				motorBikerObj.keyPressTime = currentTime;
+				motorBikerObj.setKeyPressTime(currentTime);
 			}
 		}
 		
@@ -574,46 +574,46 @@ public class Game extends GameState {
 		long currentTime = System.currentTimeMillis();
 		
 		for(MotorBiker motorBiker : motorBikerList) {
-			if(motorBiker.shieldActivated == true && currentTime > motorBiker.shieldActivatedTime + Shield.DURATION) {
-				motorBiker.shieldActivated = false;
-				paintableList.remove(motorBiker.shieldEffectSkill);
+			if(motorBiker.isShieldActivated() == true && currentTime > motorBiker.getShieldActivatedTime() + Shield.DURATION) {
+				motorBiker.setShieldActivated(false);
+				paintableList.remove(motorBiker.getShieldEffectSkill());
 			}
-			if(motorBiker.sideBladeActivated == true && currentTime > motorBiker.sideBladeActivatedTime + SideBlade.DURATION) {
-				motorBiker.sideBladeActivated = false;
-				collideableList.remove(motorBiker.sideBladeSkill.sideBlade1);
-				collideableList.remove(motorBiker.sideBladeSkill.sideBlade2);
-				paintableList.remove(motorBiker.sideBladeSkill.sideBlade1);
-				paintableList.remove(motorBiker.sideBladeSkill.sideBlade2);
+			if(motorBiker.isSideBladeActivated() == true && currentTime > motorBiker.getSideBladeActivatedTime() + SideBlade.DURATION) {
+				motorBiker.setSideBladeActivated(false);
+				collideableList.remove(motorBiker.getSideBladeSkill().sideBlade1);
+				collideableList.remove(motorBiker.getSideBladeSkill().sideBlade2);
+				paintableList.remove(motorBiker.getSideBladeSkill().sideBlade1);
+				paintableList.remove(motorBiker.getSideBladeSkill().sideBlade2);
 			}
-			if(motorBiker.reverseActivated == true && currentTime > motorBiker.reverseActivatedTime + Reverse.DURATION) {
-				motorBiker.reverseActivated = false;
-				int tmp = motorBiker.leftButton;
-				motorBiker.leftButton = motorBiker.rightButton;
-				motorBiker.rightButton = tmp;
-				tmp = motorBiker.upButton;
-				motorBiker.upButton = motorBiker.downButton;
-				motorBiker.downButton = tmp;
+			if(motorBiker.isReverseActivated() == true && currentTime > motorBiker.getReverseActivatedTime() + Reverse.DURATION) {
+				motorBiker.setReverseActivated(false);
+				int tmp = motorBiker.getLeftButton();
+				motorBiker.setLeftButton(motorBiker.getRightButton());
+				motorBiker.setRightButton(tmp);
+				tmp = motorBiker.getUpButton();
+				motorBiker.setUpButton(motorBiker.getDownButton());
+				motorBiker.setDownButton(tmp);
 			}
 		}
 	}
 	
 	public void activatePowerUp() {
 		for(MotorBiker motorBiker : motorBikerList) {
-			if(keyExists(motorBiker.keyPressedList, motorBiker.powerUp1Button)) {
-				motorBiker.activatePowerUp(motorBiker.powerUp1);
-				motorBiker.powerUp1 = null;
+			if(keyExists(motorBiker.keyPressedList, motorBiker.getPowerUp1Button())) {
+				motorBiker.activatePowerUp(motorBiker.getPowerUp1());
+				motorBiker.setPowerUp1(null);
 			}
-			if(keyExists(motorBiker.keyPressedList, motorBiker.powerUp2Button)) {
-				motorBiker.activatePowerUp(motorBiker.powerUp2);
-				motorBiker.powerUp2 = null;
+			if(keyExists(motorBiker.keyPressedList, motorBiker.getPowerUp2Button())) {
+				motorBiker.activatePowerUp(motorBiker.getPowerUp2());
+				motorBiker.setPowerUp2(null);
 			}
-			if(motorBiker.powerUp1 instanceof Reverse) {
-				motorBiker.activatePowerUp(motorBiker.powerUp1);
-				motorBiker.powerUp1 = null;
+			if(motorBiker.getPowerUp1() instanceof Reverse) {
+				motorBiker.activatePowerUp(motorBiker.getPowerUp1());
+				motorBiker.setPowerUp1(null);
 			}
-			if(motorBiker.powerUp2 instanceof Reverse) {
-				motorBiker.activatePowerUp(motorBiker.powerUp2);
-				motorBiker.powerUp2 = null;
+			if(motorBiker.getPowerUp2() instanceof Reverse) {
+				motorBiker.activatePowerUp(motorBiker.getPowerUp2());
+				motorBiker.setPowerUp2(null);
 			}
 		}
 	}

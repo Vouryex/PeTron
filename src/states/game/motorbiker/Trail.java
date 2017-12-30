@@ -1,20 +1,17 @@
 package states.game.motorbiker;
 
-
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-
 import states.game.interfaces.Collideable;
 import states.game.interfaces.Paintable;
 
 public class Trail implements Collideable, Paintable {
-	public int xPos;
-	public int yPos;
-	public int width;
-	public int height;
-	public Color color;
+	private int xPos;
+	private int yPos;
+	private int width;
+	private int height;
+	private Color color;
 	
 	public Trail(int xPos, int yPos, int width, int height, Color color) {
 		this.xPos= xPos;
